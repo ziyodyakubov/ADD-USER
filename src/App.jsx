@@ -1,33 +1,77 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [name,setName] = useState("")
+  const [age,setAge] = useState("")
+  const [phone,setPhone] = useState("")
+  const [address,setAddress] = useState("")
+  const [users, setUser] = useState([])
+
+  const adduser = (event)=>{
+      event.preventDefault()
+      event.target[0].value = ""
+      event.target[1].value = ""
+      event.target[2].value = ""
+      event.target[3].value = ""
+      users.push({name,age,phone,address})
+      setUser([...users])
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="container">
+        <div className="row mt-5">
+            <div className="col-md-8">
+                <table className='table table-bordered'>
+                  <thead>
+                    <tr>
+                    <th>T/R</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Phone number</th>
+                    <th>Address</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      users.map((item,index)=>(
+                        <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.name}</td>
+                        <td>{item.age}</td>
+                        <td>{item.phone}</td>
+                        <td>{item.address}</td>
+                      </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+            </div>
+
+            <div className="col-md-4">
+              <div className="card">
+                <div className="card-header text-center">
+                  <h1>Add user</h1>
+                </div>
+
+                <div className="card-body">
+                  <form onSubmit={adduser} id="todo">
+                    <input type="text" onChange={(e)=> setName(e.target.value)} placeholder='Enter name' className='form-control my-2'/>
+                    <input type="number" onChange={(e)=> setAge(e.target.value)} placeholder='Enter age' className='form-control my-2'/>
+                    <input type="tel" onChange={(e)=> setPhone(e.target.value)} placeholder='Enter phone number' className='form-control my-2'/>
+                    <input type="text" onChange={(e)=> setAddress(e.target.value)} placeholder='Enter address' className='form-control my-2' />
+                  </form>
+                </div>
+
+                <div className="card-footer">
+                <button id="form" type='submit' className='btn btn-primary' form="todo">Add User</button>
+                </div>
+              </div>
+            </div>      
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
