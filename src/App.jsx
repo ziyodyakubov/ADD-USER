@@ -3,19 +3,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
 function App() {
-  const [name,setName] = useState("")
-  const [age,setAge] = useState("")
-  const [phone,setPhone] = useState("")
-  const [address,setAddress] = useState("")
   const [users, setUser] = useState([])
+  const [form,setForm] = useState([])
+
+  const handleChange = (event) =>{
+    event.preventDefault()
+    const {name,value} = event.target
+
+    const obj = {...form,[name]:value}
+    setForm(obj)
+  } 
 
   const adduser = (event)=>{
       event.preventDefault()
-      event.target[0].value = ""
-      event.target[1].value = ""
-      event.target[2].value = ""
-      event.target[3].value = ""
-      users.push({name,age,phone,address})
+      users.push(form)
       setUser([...users])
   }
 
@@ -58,10 +59,10 @@ function App() {
 
                 <div className="card-body">
                   <form onSubmit={adduser} id="todo">
-                    <input type="text" onChange={(e)=> setName(e.target.value)} placeholder='Enter name' className='form-control my-2'/>
-                    <input type="number" onChange={(e)=> setAge(e.target.value)} placeholder='Enter age' className='form-control my-2'/>
-                    <input type="tel" onChange={(e)=> setPhone(e.target.value)} placeholder='Enter phone number' className='form-control my-2'/>
-                    <input type="text" onChange={(e)=> setAddress(e.target.value)} placeholder='Enter address' className='form-control my-2' />
+                    <input type="text" name="name" onChange={handleChange} placeholder='Enter name' className='form-control my-2'/>
+                    <input type="number" name="age" onChange={handleChange} placeholder='Enter age' className='form-control my-2'/>
+                    <input type="tel" name="phone" onChange={handleChange} placeholder='Enter phone number' className='form-control my-2'/>
+                    <input type="text" name="address" onChange={handleChange} placeholder='Enter address' className='form-control my-2' />
                   </form>
                 </div>
 
