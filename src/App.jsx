@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import 'boxicons'
 import { nanoid } from 'nanoid'
+import 'boxicons'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
