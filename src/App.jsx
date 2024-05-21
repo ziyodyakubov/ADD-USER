@@ -9,15 +9,14 @@ function App() {
   const handleChange = (event) =>{
     event.preventDefault()
     const {name,value} = event.target
-
-    const obj = {...form,[name]:value}
-    setForm(obj)
+    setForm({...form,[name]:value})
   } 
 
   const adduser = (event)=>{
       event.preventDefault()
       users.push(form)
       setUser([...users])
+      event.target.reset()
   }
 
   return (
